@@ -54,7 +54,7 @@
             position: relative;
         }
 
-        .movement .good1 {
+        .movement .bad1 {
             width: 30%;
             height: auto;
             position: absolute;
@@ -63,7 +63,7 @@
             transform: translateY(-27%);
         }
 
-        .movement .good2 {
+        .movement .bad2 {
             width: 30%;
             height: auto;
             position: absolute;
@@ -80,12 +80,12 @@
 
 <body>
 
-    <div class="fialContainer">
+    <div class="failContainer">
         <div class="imgst" data-aos="zoom-in-up">
-            <img src="Fail.png" alt="실패">
+            <img src="fail.png" alt="실패">
         </div>
         <div class="failtext">
-            <h2 id="score-display"></h2>
+            <h1>고은님 59점 입니다. 다시 도전하세요.</h1>
         </div>
         <div class="failbtnContainer">
             <button class="btn" onclick="gotoExam()">풀이보기</button>
@@ -93,8 +93,8 @@
         </div>
     </div>
     <div class="movement">
-        <img class="good1" src="hun1.gif" alt="절망">
-        <img class="good2" src="hun1.gif" alt="절망">
+        <img class="bad1" src="bad.gif" alt="절망">
+        <img class="bad2" src="bad.gif" alt="절망">
     </div>
     <script>
         AOS.init();
@@ -105,10 +105,6 @@
 
         function retryMain() {
             window.location.href = "select.html";
-        }
-        window.onload = function () {
-            const score = localStorage.getItem("totalScore") || 0;
-            document.getElementById("score-display").textContent = `총 점수: ${score}점`;
         }
     </script>
 </body>

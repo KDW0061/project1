@@ -4,24 +4,21 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>시험 결과</title>
+    <link rel="stylesheet" href="result.css">
 </head>
-    <style>
-        .pl {
-            background-color: pink;
-            color: white;
-        }
-    </style>
 <body>
-
-    <h1>시험 결과</h1>
-
-    <h2>✅ 정답 리스트</h2>
-    <ul id="correct-list"></ul>
-
-    <h2>❌ 오답 리스트</h2>
-    <ul id="incorrect-list"></ul>
-
-    <button onclick="retryExam()">다시 시험 보기</button>
+    <div class="container">
+        <h1>시험 결과</h1>
+        <div class="correctanswer">
+            <h2>✅ 정답 리스트</h2>
+            <ul id="correct-list"></ul>
+        </div>
+        <div class="wronganswer">
+            <h2>❌ 오답 리스트</h2>
+            <ul id="incorrect-list"></ul>
+        </div>
+        <button onclick="retryExam()">다시 시험 보기</button>
+    </div>
 
     <script>
         // 저장된 결과 데이터 가져오기
@@ -33,11 +30,11 @@
         results.forEach(result => {
             const listItem = document.createElement("li");
             listItem.innerHTML = `
-                <div class="pl"><br>
+            <div class="pl" >
                 <strong>${result.question}</strong> <br>
                 <span>✅ 정답: ${result.correctAnswer}</span> <br>
                 <span>📝 내 답: ${result.selectedAnswer}</span>
-                <div>
+            </div>
             `;
 
             if (result.isCorrect) {
