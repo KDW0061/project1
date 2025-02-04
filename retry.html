@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+
+    <style>
+        body {
+            text-align: center;
+            margin-top: 9%;
+            background-color: #FFF1FA;
+        }
+
+        .imgst {
+            width: 400px;
+            margin: auto;
+            padding: 20px;
+        }
+
+        .failContainer {
+            text-align: center;
+            margin-top: 9%;
+        }
+
+        .failbtn-container {
+            margin-top: 20px;
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+        }
+
+        .btn {
+            width: 150px;
+            padding: 10px 20px;
+            font-size: 20px;
+            color: white;
+            background-color: deeppink;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: 0.3s;
+        }
+
+        .btn:hover {
+            background-color: pink;
+        }
+        .movement {
+            width: 100%;
+            margin-top: -15%;
+            position: relative;
+        }
+
+        .movement .good1 {
+            width: 30%;
+            height: auto;
+            position: absolute;
+            left: 0;
+            top: 50%;
+            transform: translateY(-27%);
+        }
+
+        .movement .good2 {
+            width: 30%;
+            height: auto;
+            position: absolute;
+            right: 0px;
+            top: 50%;
+            transform: translateY(-27%);
+        }
+        .failtext{
+            font-size: 16px;
+        }
+    </style>
+
+</head>
+
+<body>
+
+    <div class="fialContainer">
+        <div class="imgst" data-aos="zoom-in-up">
+            <img src="Fail.png" alt="실패">
+        </div>
+        <div class="failtext">
+            <h2 id="score-display"></h2>
+        </div>
+        <div class="failbtnContainer">
+            <button class="btn" onclick="gotoExam()">풀이보기</button>
+            <button class="btn" onclick="retryMain()">다시풀기</button>
+        </div>
+    </div>
+    <div class="movement">
+        <img class="good1" src="hun1.gif" alt="절망">
+        <img class="good2" src="hun1.gif" alt="절망">
+    </div>
+    <script>
+        AOS.init();
+
+        function gotoExam() {
+            window.location.href = "result.html";
+        }
+
+        function retryMain() {
+            window.location.href = "select.html";
+        }
+        window.onload = function () {
+            const score = localStorage.getItem("totalScore") || 0;
+            document.getElementById("score-display").textContent = `총 점수: ${score}점`;
+        }
+    </script>
+</body>
+
+</html>
