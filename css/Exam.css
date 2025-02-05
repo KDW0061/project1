@@ -73,6 +73,7 @@ body {
 .omr-question {
     font-weight: bold;
     cursor: pointer;
+    width: 2ch;
     margin-right: 10px;
     color: deeppink;
 }
