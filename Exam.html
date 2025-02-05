@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Exam Application</title>
-    <link rel="stylesheet" href="Exam.css">
+    <link rel="stylesheet" href="css/Exam.css">
 </head>
 
 <body>
@@ -208,9 +208,9 @@
             if (confirm("정말 제출하시겠습니까?")) {
                 console.log("제출되었습니다.");
                 if (totalScore >= 60) {
-                    window.location.href = "pass.html";
+                    window.location.href = "view/pass.html";
                 } else {
-                    window.location.href = "retry.html";
+                    window.location.href = "view/retry.html";
                 }
 
             } else {
