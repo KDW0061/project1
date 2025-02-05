@@ -84,7 +84,7 @@
                 return !document.querySelector(`input[name="question-${q.id}"]:checked`);
             }).length;
 
-            unansweredCount.innerText = unanswered > 0 ? `안 푼 문제: ${unanswered}` : "안 푼 문제 없음";
+            unansweredCount.innerText = unanswered > 0 ? `안 푼 문제 : ${unanswered}` : "안 푼 문제 없음";
         }
 
 
@@ -192,7 +192,8 @@
                     question: q.question,
                     selectedAnswer: selected ? q.options[parseInt(selected.value)] : "선택 안함",
                     correctAnswer: q.options[q.correct - 1],
-                    isCorrect: selected ? parseInt(selected.value) === q.correct - 1 : false
+                    isCorrect: selected ? parseInt(selected.value) === q.correct - 1 : false,
+                    solution: q.solution || "풀이 정보가 없습니다."
                 };
             });
 
@@ -211,6 +212,7 @@
                 window.location.href = "retry.html";
             }
         }
+
 
 
         loadQuestions().then(() => {

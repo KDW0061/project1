@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>자격증 시험 합격자 명단</title>
+    <style>
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background-color: #f8f9fa;
+        }
+        .container {
+            text-align: center;
+        }
+        .scroll-container {
+            width: 600px;
+            height: 400px; /* 보이는 영역 */
+            border: 2px solid #333;
+            border-radius: 10px;
+            overflow: hidden;
+            position: relative;
+        }
+        .scroll-content {
+            display: flex;
+            flex-direction: column;
+            position: absolute;
+            width: 100%;
+            animation: scrollLoop 10s linear infinite;
+        }
+        @keyframes scrollLoop {
+            0% { transform: translateY(0); }
+            100% { transform: translateY(-50%); } /* 절반만 이동 */
+        }
+        img {
+            width: 100%;
+            display: block;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>자격증 시험 합격자 명단</h1>
+        <div class="scroll-container">
+            <div class="scroll-content">
+                <!-- 같은 이미지 목록을 2번 반복 -->
+                <img src="/images/good4.gif" alt="합격자 명단 1">
+                <img src="/images/good4.gif" alt="합격자 명단 1">
+            </div>
+        </div>
+    </div>
+</body>
+</html>
