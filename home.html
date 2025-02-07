@@ -43,8 +43,9 @@
             FAQ 챗봇
             <button id="closeChatbot">✖</button>
         </div>
-        <div id="chatbox"></div>
-        <div id="questionButtons"></div>
+        <div id="questionButtons">
+            <div id="chatbox"></div>
+        </div>
     </div>
 
     <script>
@@ -70,18 +71,26 @@
         const chatbotContainer = document.getElementById("chatbotContainer");
         const closeChatbot = document.getElementById("closeChatbot");
         const chatbox = document.getElementById("chatbox");
+        const chatbox2 = document.getElementById("chatbox2");
         const questionButtons = document.getElementById("questionButtons");
 
         // 챗봇 버튼 클릭 시 챗봇 창 토글
         chatbotButton.addEventListener("click", () => {
-            chatbotContainer.style.display = chatbotContainer.style.display === "flex" ? "none" : "flex";
-            displayChat("안녕","무엇을 도와드릴까요?")
+            if (chatbotContainer.style.display === "none" || chatbotContainer.style.display === "") {
+                chatbotContainer.style.display = "flex";
+                displayChat2("무엇을 도와드릴까요?")
+            } else {
+                chatbotContainer.style.display = "none";
+                chatbox.innerHTML = ""; // 채팅 메시지 초기화
+                chatbox2.innerHTML = ""; // 채팅 메시지 초기화
+            }
         });
 
         // 닫기 버튼 클릭 시 챗봇 창 닫기 + 채팅 초기화
         closeChatbot.addEventListener("click", () => {
             chatbotContainer.style.display = "none";
             chatbox.innerHTML = ""; // 채팅 메시지 초기화
+            chatbox2.innerHTML = ""; // 채팅 메시지 초기화
         });
 
         // 질문 버튼 생성
@@ -111,7 +120,21 @@
                 chatbox.appendChild(botMessage);
                 chatbox.scrollTop = chatbox.scrollHeight; // 스크롤 자동 이동
             }, 500);
+            displayChat2("무엇을 도와드릴까요?")
         }
+
+        function displayChat2(answer) {
+            // 챗봇 답변 추가 (약간의 딜레이)
+            setTimeout(() => {
+                const botMessage = document.createElement("div");
+                botMessage.classList.add("bot");
+                botMessage.innerHTML = `<div class="bubble">${answer}</div>`;
+                chatbox.appendChild(botMessage);
+                chatbox.scrollTop = chatbox.scrollHeight; // 스크롤 자동 이동
+            }, 500);
+        }
+
+
 
         // 초기 버튼 생성
         createQuestionButtons();
