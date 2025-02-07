@@ -43,9 +43,9 @@
             FAQ 챗봇
             <button id="closeChatbot">✖</button>
         </div>
-        <div id="questionButtons">
-            <div id="chatbox"></div>
-        </div>
+
+        <div id="chatbox"></div>
+        <div id="questionButtons"></div>
     </div>
 
     <script>
@@ -142,63 +142,91 @@
         const questionButtons = document.getElementById("questionButtons");
 
         // 챗봇 버튼 클릭 시 챗봇 창 토글
+        let historyPath = [];
+
         chatbotButton.addEventListener("click", () => {
             if (chatbotContainer.style.display === "none" || chatbotContainer.style.display === "") {
                 chatbotContainer.style.display = "flex";
-                displayChat2("무엇을 도와드릴까요?")
+                displayChat2("무엇을 도와드릴까요?");
+                showQuestions(faqData);
             } else {
                 chatbotContainer.style.display = "none";
-                chatbox.innerHTML = ""; // 채팅 메시지 초기화
+                chatbox.innerHTML = "";
+                questionButtons.innerHTML = "";
             }
         });
 
-        // 닫기 버튼 클릭 시 챗봇 창 닫기 + 채팅 초기화
         closeChatbot.addEventListener("click", () => {
             chatbotContainer.style.display = "none";
-            chatbox.innerHTML = ""; // 채팅 메시지 초기화
+            chatbox.innerHTML = "";
+            questionButtons.innerHTML = "";
+            historyPath = [];
         });
 
-        // 질문 버튼 생성
-        function createQuestionButtons() {
-            Object.keys(faqData).forEach(question => {
+        function showQuestions(data, path = []) {
+            questionButtons.innerHTML = "";
+            historyPath = path;
+
+            Object.keys(data).forEach(key => {
                 const button = document.createElement("button");
-                button.classList.add("question");
-                button.textContent = question;
-                button.onclick = () => displayChat(question, faqData[question]);
+                button.textContent = key;
+                button.onclick = () => {
+                    displayUserSelection(key);
+                    if (Array.isArray(data[key])) {
+                        showAnswer(data[key]);
+                    } else {
+                        showQuestions(data[key], [...path, key]);
+                    }
+                };
                 questionButtons.appendChild(button);
+            });
+
+            if (path.length > 0) {
+                const backButton = document.createElement("button");
+                backButton.textContent = "뒤로가기";
+                backButton.onclick = () => {
+                    chatbox.innerHTML = "";
+                    goBack(path);
+                };
+                questionButtons.appendChild(backButton);
+            }
+        }
+
+        function goBack(path) {
+            const newPath = path.slice(0, -1);
+            let data = faqData;
+            newPath.forEach(p => {
+                data = data[p];
+            });
+            displayChat2("무엇을 도와드릴까요?");
+            showQuestions(data, newPath);
+        }
+
+        function showAnswer(answers) {
+            answers.forEach(answer => {
+                const message = document.createElement("div");
+                message.classList.add("message", "bot");
+                message.innerHTML = `<div class="bubble">${answer}</div>`;
+                chatbox.appendChild(message);
             });
         }
 
-        // 채팅 말풍선 추가
-        function displayChat(question, answer) {
-            // 사용자 질문 추가
+        function displayUserSelection(selection) {
             const userMessage = document.createElement("div");
             userMessage.classList.add("message", "user");
-            userMessage.innerHTML = `<div class="bubble">${question}</div>`;
+            userMessage.innerHTML = `<div class="bubble">선택한 항목: ${selection}</div>`;
             chatbox.appendChild(userMessage);
+        }
 
-            // 챗봇 답변 추가 (약간의 딜레이)
+        function displayChat2(answer) {
             setTimeout(() => {
                 const botMessage = document.createElement("div");
                 botMessage.classList.add("message", "bot");
                 botMessage.innerHTML = `<div class="bubble">${answer}</div>`;
                 chatbox.appendChild(botMessage);
-                chatbox.scrollTop = chatbox.scrollHeight; // 스크롤 자동 이동
-            }, 500);
-            displayChat2("무엇을 도와드릴까요?")
-        }
-
-        function displayChat2(answer) {
-            // 챗봇 답변 추가 (약간의 딜레이)
-            setTimeout(() => {
-                const botMessage = document.createElement("div");
-                botMessage.classList.add("bot");
-                botMessage.innerHTML = `<div class="bubble">${answer}</div>`;
-                chatbox.appendChild(botMessage);
-                chatbox.scrollTop = chatbox.scrollHeight; // 스크롤 자동 이동
+                chatbox.scrollTop = chatbox.scrollHeight;
             }, 500);
         }
-
 
 
         // 초기 버튼 생성
