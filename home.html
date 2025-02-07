@@ -71,7 +71,6 @@
         const chatbotContainer = document.getElementById("chatbotContainer");
         const closeChatbot = document.getElementById("closeChatbot");
         const chatbox = document.getElementById("chatbox");
-        const chatbox2 = document.getElementById("chatbox2");
         const questionButtons = document.getElementById("questionButtons");
 
         // 챗봇 버튼 클릭 시 챗봇 창 토글
@@ -82,7 +81,6 @@
             } else {
                 chatbotContainer.style.display = "none";
                 chatbox.innerHTML = ""; // 채팅 메시지 초기화
-                chatbox2.innerHTML = ""; // 채팅 메시지 초기화
             }
         });
 
@@ -90,7 +88,6 @@
         closeChatbot.addEventListener("click", () => {
             chatbotContainer.style.display = "none";
             chatbox.innerHTML = ""; // 채팅 메시지 초기화
-            chatbox2.innerHTML = ""; // 채팅 메시지 초기화
         });
 
         // 질문 버튼 생성
