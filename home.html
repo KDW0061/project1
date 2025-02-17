@@ -43,9 +43,8 @@
             FAQ 챗봇
             <button id="closeChatbot">✖</button>
         </div>
-        <div id="questionButtons">
-            <div id="chatbox"></div>
-        </div>
+        <div id="chatbox"></div>
+        <div id="questionButtons"></div>
     </div>
 
     <script>
@@ -53,88 +52,311 @@
             window.location.href = "name.html";
         }
 
-        // 미리 정의된 FAQ 데이터
         const faqData = {
-            "정보처리기사 시험 과목은?": "필기 시험은 5과목(소프트웨어 설계, 데이터베이스 등)으로 구성됩니다.",
-            "정보처리기사 합격 기준은?": "필기는 과목별 40점 이상, 평균 60점 이상이어야 합니다.",
-            "실기 시험은 어떤 방식인가요?": "SQL 작성 및 서술형 문제로 출제됩니다.",
-            "정보처리기능사 시험은 CBT 방식인가요?": "네, 필기 시험은 CBT(컴퓨터 기반 시험) 방식입니다.",
-            "기사, 산업기사, 기능사의 차이점은?": "기사(대졸), 산업기사(초대졸), 기능사(고졸) 수준의 시험입니다.",
-            "필기 시험 유효 기간은?": "필기 합격 후 2년 이내에 실기를 통과해야 합니다.",
-            "실기 시험에서 중요한 부분은?": "SQL 작성과 시스템 개발 관련 문제가 중요한 비중을 차지합니다.",
-            "필기 시험 문제 수와 시간은?": "필기는 총 100문제, 시험 시간은 150분입니다.",
-            "CBT 시험 결과 확인 시점은?": "필기 시험은 즉시 확인 가능하며, 실기는 약 4주 후 발표됩니다.",
-            "시험 준비 추천 교재는?": "CBT 문제풀이 사이트, 기출문제 풀이 앱, 한국산업인력공단 자료를 참고하세요."
+            "자격증": {
+                "정보처리기사": {
+                    "시험 과목": "필기 시험은 5과목(소프트웨어 설계, 데이터베이스 등)으로 구성됩니다.",
+                    "합격 기준": "필기는 과목별 40점 이상, 평균 60점 이상이어야 합니다.",
+                    "실기 시험 방식": "SQL 작성 및 서술형 문제로 출제됩니다.",
+                    "시험 준비 추천 교재": "CBT 문제풀이 사이트, 기출문제 풀이 앱, 한국산업인력공단 자료를 참고하세요."
+                },
+                "정보처리산업기사": {
+                    "시험 과목": "정보처리기사를 기준으로 일부 과목이 축소되어 출제됩니다.",
+                    "합격 기준": "필기는 과목별 40점 이상, 평균 60점 이상이어야 하며, 실기 시험을 통과해야 합니다.",
+                    "실기 시험 방식": "실기는 SQL 작성과 시스템 분석 및 설계 관련 문제가 출제됩니다.",
+                    "시험 준비 추천 교재": "한국산업인력공단 기출문제, 관련 학습 사이트를 참고하세요."
+                },
+                "정보처리기능사": {
+                    "시험 과목": "기능사 시험은 주로 컴퓨터 기초와 프로그래밍에 관한 문제가 출제됩니다.",
+                    "합격 기준": "필기 시험은 60점 이상, 실기 시험은 70점 이상이어야 합격입니다.",
+                    "실기 시험 방식": "기초적인 프로그램 작성 및 실습 문제를 해결해야 합니다.",
+                    "시험 준비 추천 교재": "기본서와 기출문제 풀이집, 온라인 강의를 참고하세요."
+                }
+            },
+            "커리어": {
+                "자격증의 직업적 가치": {
+                    "정보처리기사": "IT 분야에서 필수 자격증 입니다.",
+                    "산업기사와 기능사": "실무 경험이 적은 사람에게 유리 합니다."
+                },
+                "연봉 정보": {
+                    "정보처리기사": "평균 연봉 5000만원 입니다.",
+                    "정보처리산업기사": "평균 연봉 4000만원 입니다.",
+                    "정보처리기능사": "평균 연봉 3500만원 입니다."
+                },
+                "진로 방향": {
+                    "정보처리기사": [
+                        "소프트웨어 개발자",
+                        "시스템 관리자",
+                        "IT 컨설턴트 등이 있습니다."
+                    ],
+                    "정보처리산업기사": [
+                        "네트워크 엔지니어",
+                        "시스템 엔지니어 등이 있습니다."
+                    ],
+                    "정보처리기능사": [
+                        "기술 지원",
+                        "데이터 분석가 등이 있습니다."
+                    ]
+                }
+            },
+            "시험 후 절차": {
+                "합격 후 절차": {
+                    "정보처리기사": "자격증 발급 신청 후 2주 이내 수령해야 합니다.",
+                    "정보처리산업기사": "자격증 발급 신청 후 2주 이내 수령해야 합니다."
+                },
+                "자격증 갱신": {
+                    "정보처리기사": "5년마다 갱신, 30시간 이상의 교육 이수해야 합니다.",
+                    "정보처리산업기사": "5년마다 갱신, 30시간 이상의 교육 이수해야 합니다."
+                }
+            },
+            "자격증을 통한 진로 탐색": {
+                "관련 직무": {
+                    "정보처리기사": [
+                        "소프트웨어 개발",
+                        "<br>시스템 구축 및 운영",
+                        "<br>IT 프로젝트 관리 등이 있습니다."
+                    ],
+                    "정보처리산업기사": [
+                        "시스템 설계 및 운영",
+                        "<br>네트워크 엔지니어링 등이 있습니다."
+                    ],
+                    "정보처리기능사": [
+                        "기술 지원",
+                        "<br>데이터베이스 관리 등이 있습니다."
+                    ]
+                },
+                "관련 산업 동향": {
+                    "IT 산업": "지속적인 성장 중, AI 및 클라우드 기술 수요 증가 등이 있습니다.",
+                    "소프트웨어 개발": "프로그래밍 언어, 프레임워크 관련 기술 발전 등이 있습니다.",
+                    "네트워크 엔지니어": "5G 및 IoT 관련 기술로 수요 확대 등이 있습니다."
+                }
+            }
         };
 
         const chatbotButton = document.getElementById("chatbotButton");
         const chatbotContainer = document.getElementById("chatbotContainer");
         const closeChatbot = document.getElementById("closeChatbot");
         const chatbox = document.getElementById("chatbox");
-        const questionButtons = document.getElementById("questionButtons");
 
-        // 챗봇 버튼 클릭 시 챗봇 창 토글
         chatbotButton.addEventListener("click", () => {
-            if (chatbotContainer.style.display === "none" || chatbotContainer.style.display === "") {
-                chatbotContainer.style.display = "flex";
-                displayChat2("무엇을 도와드릴까요?")
-            } else {
-                chatbotContainer.style.display = "none";
-                chatbox.innerHTML = ""; // 채팅 메시지 초기화
-            }
+            chatbotContainer.style.display = chatbotContainer.style.display === "flex" ? "none" : "flex";
+            chatbox.innerHTML = ""; // 초기화
+
+            // "안녕" 사용자 메시지 추가
+            const userMessage = document.createElement("div");
+            userMessage.classList.add("message", "user");
+            userMessage.innerHTML = `<div class="bubble">안녕</div>`;
+            chatbox.appendChild(userMessage);
+
+            // 0.5초 후 챗봇 응답 추가
+            setTimeout(() => {
+                displayChatWithOptions("무엇을 도와드릴까요?", Object.keys(faqData));
+            }, 500);
         });
 
-        // 닫기 버튼 클릭 시 챗봇 창 닫기 + 채팅 초기화
+
+
         closeChatbot.addEventListener("click", () => {
             chatbotContainer.style.display = "none";
-            chatbox.innerHTML = ""; // 채팅 메시지 초기화
+            chatbox.innerHTML = "";
         });
 
-        // 질문 버튼 생성
-        function createQuestionButtons() {
-            Object.keys(faqData).forEach(question => {
-                const button = document.createElement("button");
-                button.classList.add("question");
-                button.textContent = question;
-                button.onclick = () => displayChat(question, faqData[question]);
-                questionButtons.appendChild(button);
+        function displayChatWithOptions(question, options, backTo) {
+            const botMessage = document.createElement("div");
+            botMessage.classList.add("message", "bot");
+
+            const bubble = document.createElement("div");
+            bubble.classList.add("bubble");
+
+            const textContainer = document.createElement("div");
+            textContainer.textContent = question;
+
+            textContainer.style.padding = "7px";
+
+            bubble.appendChild(textContainer);
+
+            const buttonContainer = document.createElement("div");
+            buttonContainer.classList.add("button-group");
+
+            // 카테고리 버튼 생성
+            Object.keys(faqData).forEach(category => {
+                const categoryButton = document.createElement("button");
+                categoryButton.classList.add("question-option");
+                categoryButton.textContent = category;
+                categoryButton.onclick = () => {
+                    displayCategoryQuestions(category, backTo);
+                    scrollToBottom(); // 자동 스크롤
+                };
+                buttonContainer.appendChild(categoryButton);
             });
+
+            // 뒤로가기 버튼
+            if (backTo) {
+                const backButton = document.createElement("button");
+                backButton.textContent = "뒤로가기";
+                backButton.classList.add("back-button");
+                backButton.onclick = () => {
+                    if (backTo === "category") {
+                        displayChatWithOptions("무엇을 도와드릴까요?", Object.keys(faqData), null);
+                    } else {
+                        displayCategoryQuestions(backTo);
+                    }
+                    scrollToBottom(); // 자동 스크롤
+                };
+                buttonContainer.appendChild(backButton);
+            }
+
+            bubble.appendChild(buttonContainer);
+            botMessage.appendChild(bubble);
+            chatbox.appendChild(botMessage);
+
+            scrollToBottom(); // 자동 스크롤
         }
 
-        // 채팅 말풍선 추가
+        function displayCategoryQuestions(category, backTo) {
+            
+            const botMessage = document.createElement("div");
+            botMessage.classList.add("message", "bot");
+
+            const bubble = document.createElement("div");
+            bubble.classList.add("bubble");
+
+            const textContainer = document.createElement("div");
+
+            displayChat(category); // 선택한 질문을 사용자 메시지로 보여주기
+
+            textContainer.textContent = `${category}에 대한 질문들입니다.`;
+
+            textContainer.style.padding = "7px";
+            bubble.appendChild(textContainer);
+
+            const buttonContainer = document.createElement("div");
+            buttonContainer.classList.add("button-group");
+
+            // 선택된 카테고리의 질문 버튼 생성
+            const questions = faqData[category];
+            Object.keys(questions).forEach(subject => {
+                const subjectButton = document.createElement("button");
+                subjectButton.classList.add("question-option");
+                subjectButton.textContent = subject;
+                subjectButton.onclick = () => {
+                    // 사용자 메시지 표시
+                    displaySubjectQuestions(category, subject, backTo); // 해당 과목의 질문들로 이동
+                    scrollToBottom(); // 자동 스크롤
+                };
+                buttonContainer.appendChild(subjectButton);
+            });
+
+            // 뒤로가기 버튼 추가
+            const backButton = document.createElement("button");
+            backButton.textContent = "뒤로가기";
+            backButton.classList.add("back-button");
+            backButton.onclick = () => {
+                displayChatWithOptions("무엇을 도와드릴까요?", Object.keys(faqData), null);
+                scrollToBottom(); // 자동 스크롤
+            };
+            buttonContainer.appendChild(backButton);
+
+            bubble.appendChild(buttonContainer);
+            botMessage.appendChild(bubble);
+            chatbox.appendChild(botMessage);
+
+            scrollToBottom(); // 자동 스크롤
+        }
+
+        function displaySubjectQuestions(category, subject, backTo) {
+            const botMessage = document.createElement("div");
+            botMessage.classList.add("message", "bot");
+
+            const bubble = document.createElement("div");
+            bubble.classList.add("bubble");
+
+            const textContainer = document.createElement("div");
+            
+            displayChat(subject); // 선택한 질문을 사용자 메시지로 보여주기
+
+            textContainer.textContent = `${subject}에 대한 질문들입니다.`;
+
+            textContainer.style.padding = "7px";
+            bubble.appendChild(textContainer);
+
+            const buttonContainer = document.createElement("div");
+            buttonContainer.classList.add("button-group");
+
+            // 해당 과목의 질문 버튼 생성
+            const questions = faqData[category][subject];
+            if (Array.isArray(questions)) {
+                questions.forEach(question => {
+                    const questionButton = document.createElement("button");
+                    questionButton.classList.add("question-option");
+                    questionButton.textContent = question;
+                    questionButton.onclick = () => {
+                        // 사용자 질문 표시
+                        displayChat(question); // 선택한 질문을 사용자 메시지로 보여주기
+                        displayChat(question, questions.find(q => q === question)); // 챗봇의 답변도 함께 표시
+                        scrollToBottom(); // 자동 스크롤
+                    };
+                    buttonContainer.appendChild(questionButton);
+                });
+            } else {
+                Object.keys(questions).forEach(question => {
+                    const questionButton = document.createElement("button");
+                    questionButton.classList.add("question-option");
+                    questionButton.textContent = question;
+                    questionButton.onclick = () => {
+                        // 사용자 질문 표시
+                        displayChat(question, questions[question]); // 챗봇의 답변도 함께 표시
+                        scrollToBottom(); // 자동 스크롤
+                    };
+                    buttonContainer.appendChild(questionButton);
+                });
+            }
+
+            // 뒤로가기 버튼 추가
+            const backButton = document.createElement("button");
+            backButton.textContent = "뒤로가기";
+            backButton.classList.add("back-button");
+            backButton.onclick = () => {
+                if (backTo === "category") {
+                    displayCategoryQuestions(category, backTo);
+                } else {
+                    displayChatWithOptions("무엇을 도와드릴까요?", Object.keys(faqData), null);
+                }
+                scrollToBottom(); // 자동 스크롤
+            };
+            buttonContainer.appendChild(backButton);
+
+            bubble.appendChild(buttonContainer);
+            botMessage.appendChild(bubble);
+            chatbox.appendChild(botMessage);
+
+            scrollToBottom(); // 자동 스크롤
+        }
+        // 자동으로 대화창 맨 아래로 스크롤하는 함수
+        function scrollToBottom() {
+            chatbox.scrollTop = chatbox.scrollHeight;
+        }
+
         function displayChat(question, answer) {
-            // 사용자 질문 추가
+            // 사용자 질문 말풍선 표시
             const userMessage = document.createElement("div");
             userMessage.classList.add("message", "user");
             userMessage.innerHTML = `<div class="bubble">${question}</div>`;
             chatbox.appendChild(userMessage);
 
-            // 챗봇 답변 추가 (약간의 딜레이)
-            setTimeout(() => {
-                const botMessage = document.createElement("div");
-                botMessage.classList.add("message", "bot");
-                botMessage.innerHTML = `<div class="bubble">${answer}</div>`;
-                chatbox.appendChild(botMessage);
-                chatbox.scrollTop = chatbox.scrollHeight; // 스크롤 자동 이동
-            }, 500);
-            displayChat2("무엇을 도와드릴까요?")
-        }
-
-        function displayChat2(answer) {
-            // 챗봇 답변 추가 (약간의 딜레이)
-            setTimeout(() => {
-                const botMessage = document.createElement("div");
-                botMessage.classList.add("bot");
-                botMessage.innerHTML = `<div class="bubble">${answer}</div>`;
-                chatbox.appendChild(botMessage);
-                chatbox.scrollTop = chatbox.scrollHeight; // 스크롤 자동 이동
-            }, 500);
+            // 챗봇 답변 표시 (0.5초 후에 나타남)
+            if (answer) {
+                setTimeout(() => {
+                    const botMessage = document.createElement("div");
+                    botMessage.classList.add("message", "bot");
+                    botMessage.innerHTML = `<div class="bubble">${answer}</div>`;
+                    chatbox.appendChild(botMessage);
+                    chatbox.scrollTop = chatbox.scrollHeight;
+                }, 500);
+            }
         }
 
 
-
-        // 초기 버튼 생성
-        createQuestionButtons();
     </script>
 </body>
 
