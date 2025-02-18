@@ -30,9 +30,19 @@
     </div>
 
     <div class="button-container">
-        <button type="button" onclick="member">로그인 하기</button>
+        <button onclick="showLogin()">로그인 하기</button>
         <button class="button1" onclick="nonmember()">비회원 이용</button>
     </div>
+
+    <div class="login-container" id="loginContainer">
+        <h3>로그인</h3>
+        <input type="text" id="username" placeholder="아이디를 입력하세요">
+        <input type="password" id="password" placeholder="비밀번호를 입력하세요">
+        <button onclick="login()">로그인</button>
+        <button onclick="signup()">회원가입</button>
+        <div class="message" id="loginMessage"></div>
+    </div>
+
 
     <!-- 챗봇 버튼 -->
     <button id="chatbotButton">💬</button>
@@ -48,9 +58,57 @@
     </div>
 
     <script>
+        // 로그인 창 보이기
+        function showLogin() {
+            const loginContainer = document.getElementById('loginContainer');
+            if (loginContainer.style.display === 'flex') {
+                loginContainer.style.display = 'none'; // 로그인 창 닫기
+            } else {
+                loginContainer.style.display = 'flex'; // 로그인 창 열기
+            }
+        }
+        //로그인 하기
+        function login() {
+            window.location.href = "subject_select.html";
+        }
+        //회원가입
+        function signup() {
+            window.location.href = "name1.html";
+        }
+
+        // 비회원 이용
         function nonmember() {
             window.location.href = "name.html";
         }
+
+        // 로그인 함수
+        function register() {
+            const userId = document.getElementById("userIdInput").value.trim();
+            const password = document.getElementById("passwordInput").value.trim();
+
+            if (!userId || !password) {
+                alert("모든 정보를 입력해주세요!");
+                return;
+            }
+
+            localStorage.setItem("userId", userId);
+
+            let existingUsers = localStorage.getItem("users");
+            existingUsers = existingUsers ? JSON.parse(existingUsers) : [];
+
+            if (existingUsers.some(user => user.userId === userId)) {
+                alert("이미 존재하는 아이디입니다. 다른 아이디를 사용해주세요.");
+                return;
+            }
+
+            const userData = { userId, password };
+            existingUsers.push(userData);
+            localStorage.setItem("users", JSON.stringify(existingUsers.value));
+
+            alert("회원가입이 완료되었습니다!");
+            window.location.href = "home.html";
+        }
+
 
         const faqData = {
             "자격증": {
@@ -122,7 +180,7 @@
                     ],
                     "정보처리기능사": [
                         "기술 지원",
-                        "<br>데이터베이스 관리 등이 있습니다."
+                        "데이터베이스 관리 등이 있습니다."
                     ]
                 },
                 "관련 산업 동향": {
@@ -130,6 +188,8 @@
                     "소프트웨어 개발": "프로그래밍 언어, 프레임워크 관련 기술 발전 등이 있습니다.",
                     "네트워크 엔지니어": "5G 및 IoT 관련 기술로 수요 확대 등이 있습니다."
                 }
+
+
             }
         };
 
@@ -170,9 +230,7 @@
 
             const textContainer = document.createElement("div");
             textContainer.textContent = question;
-
             textContainer.style.padding = "7px";
-
             bubble.appendChild(textContainer);
 
             const buttonContainer = document.createElement("div");
@@ -214,7 +272,7 @@
         }
 
         function displayCategoryQuestions(category, backTo) {
-            
+
             const botMessage = document.createElement("div");
             botMessage.classList.add("message", "bot");
 
@@ -247,6 +305,7 @@
                 buttonContainer.appendChild(subjectButton);
             });
 
+
             // 뒤로가기 버튼 추가
             const backButton = document.createElement("button");
             backButton.textContent = "뒤로가기";
@@ -272,7 +331,7 @@
             bubble.classList.add("bubble");
 
             const textContainer = document.createElement("div");
-            
+
             displayChat(subject); // 선택한 질문을 사용자 메시지로 보여주기
 
             textContainer.textContent = `${subject}에 대한 질문들입니다.`;
@@ -312,6 +371,7 @@
                 });
             }
 
+
             // 뒤로가기 버튼 추가
             const backButton = document.createElement("button");
             backButton.textContent = "뒤로가기";
@@ -332,10 +392,13 @@
 
             scrollToBottom(); // 자동 스크롤
         }
+
         // 자동으로 대화창 맨 아래로 스크롤하는 함수
         function scrollToBottom() {
             chatbox.scrollTop = chatbox.scrollHeight;
         }
+
+
 
         function displayChat(question, answer) {
             // 사용자 질문 말풍선 표시
@@ -358,6 +421,7 @@
 
 
     </script>
+
 </body>
 
 </html>
