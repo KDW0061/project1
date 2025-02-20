@@ -43,7 +43,6 @@
         <div class="message" id="loginMessage"></div>
     </div>
 
-
     <!-- 챗봇 버튼 -->
     <button id="chatbotButton">💬</button>
 
@@ -105,9 +104,11 @@
                 return;
             }
 
-            // 로그인 성공 시 userId 저장
+            // ✅ 로그인 성공 시 userId와 userName 모두 저장
             localStorage.setItem("userId", userId);
-            alert(`${userId}님, 로그인 성공!`);
+            localStorage.setItem("userName", user.username); // 추가 저장
+
+            alert(`${user.username}님, 로그인 성공!`);
             window.location.href = "subject_select.html"; // 로그인 후 이동할 페이지
         }
 
@@ -225,8 +226,6 @@
             }, 500);
         });
 
-
-
         closeChatbot.addEventListener("click", () => {
             chatbotContainer.style.display = "none";
             chatbox.innerHTML = "";
@@ -316,7 +315,6 @@
                 buttonContainer.appendChild(subjectButton);
             });
 
-
             // 뒤로가기 버튼 추가
             const backButton = document.createElement("button");
             backButton.textContent = "뒤로가기";
@@ -382,7 +380,6 @@
                 });
             }
 
-
             // 뒤로가기 버튼 추가
             const backButton = document.createElement("button");
             backButton.textContent = "뒤로가기";
@@ -409,8 +406,6 @@
             chatbox.scrollTop = chatbox.scrollHeight;
         }
 
-
-
         function displayChat(question, answer) {
             // 사용자 질문 말풍선 표시
             const userMessage = document.createElement("div");
@@ -429,7 +424,6 @@
                 }, 500);
             }
         }
-
 
     </script>
 
