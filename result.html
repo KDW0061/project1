@@ -10,8 +10,9 @@
 
 <body>
     <div class="container">
-        <h1 id="resultText">님</h1>
-        <P>각 문제를 클릭하여 풀이를 확인할 수 있습니다. <button onclick="problemadd()" class="retrybutton" style="margin-left: 1325px;">문제 추가</button></P>
+        <h1 id="resultText"></h1>
+        <P>각 문제를 클릭하여 풀이를 확인할 수 있습니다. <button onclick="problemadd()" class="retrybutton" style="margin-left: 70%; width: 100px;">문제
+                추가</button></P>
 
         <!-- 정답 리스트 -->
         <h2>✅ 정답 리스트</h2>
@@ -34,20 +35,19 @@
             window.location.href = "home.html";
         }
         function problemadd() {
-            window.location.href = "problem.html";
+            window.location.href = "add_question.html";
         }
 
 
         //이름 받아오기
         const userName = localStorage.getItem("userName") || "이름없음";
         //아이디 받아오기
-        const savedUserId = localStorage.getItem("userId");
+        const savedUserId = localStorage.getItem("userId") || "이름없음";
 
-        if (savedUserId) {
-            // ID 값이 있으면 화면에 표시
-            document.getElementById('resultText').textContent = `${savedUserId}`;
+        if (userName) {
+            document.getElementById("resultText").textContent = `${userName}님`;
         } else {
-            document.getElementById("resultText").textContent = `${userName}`;
+            document.getElementById("resultText").textContent = `${savedUserId}님`;
         }
 
         // 저장된 결과 데이터 가져오기
@@ -107,6 +107,7 @@
             localStorage.removeItem("examResults"); // 이전 결과 삭제
             window.location.href = "subject_select.html";
         }
+
     </script>
 </body>
 

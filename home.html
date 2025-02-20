@@ -58,22 +58,24 @@
     </div>
 
     <script>
+
+        const logindata = [
+            { "username": "고은이", "password": "1234" },
+            { "username": "김대원", "password": "1234" },
+            { "username": "조수아", "password": "1234" },
+            { "username": "장윤성", "password": "1234" },
+            { "username": "고은123", "password": "1212" }
+        ];
+
         // 로그인 창 보이기
         function showLogin() {
             const loginContainer = document.getElementById('loginContainer');
-            if (loginContainer.style.display === 'flex') {
-                loginContainer.style.display = 'none'; // 로그인 창 닫기
-            } else {
-                loginContainer.style.display = 'flex'; // 로그인 창 열기
-            }
+            loginContainer.style.display = (loginContainer.style.display === 'flex') ? 'none' : 'flex';
         }
-        //로그인 하기
-        function login() {
-            window.location.href = "subject_select.html";
-        }
-        //회원가입
+
+        // 회원가입 페이지 이동
         function signup() {
-            window.location.href = "name1.html";
+            window.location.href = "join.html";
         }
 
         // 비회원 이용
@@ -81,34 +83,43 @@
             window.location.href = "name.html";
         }
 
-        // 로그인 함수
-        function register() {
-            const userId = document.getElementById("userIdInput").value.trim();
-            const password = document.getElementById("passwordInput").value.trim();
+        // 로그인 함수 (logindata를 직접 사용)
+        function login() {
+            const userId = document.getElementById("username").value.trim();
+            const password = document.getElementById("password").value.trim();
 
             if (!userId || !password) {
-                alert("모든 정보를 입력해주세요!");
+                alert("아이디와 비밀번호를 입력하세요!");
                 return;
             }
 
+            console.log("입력된 아이디:", userId);
+            console.log("입력된 비밀번호:", password);
+            console.log("저장된 사용자 목록:", logindata); // 콘솔에서 데이터 확인
+
+            // 사용자 인증 확인
+            const user = logindata.find(user => user.username === userId && user.password === password);
+
+            if (!user) {
+                alert("아이디 또는 비밀번호가 올바르지 않습니다.");
+                return;
+            }
+
+            // 로그인 성공 시 userId 저장
             localStorage.setItem("userId", userId);
-
-            let existingUsers = localStorage.getItem("users");
-            existingUsers = existingUsers ? JSON.parse(existingUsers) : [];
-
-            if (existingUsers.some(user => user.userId === userId)) {
-                alert("이미 존재하는 아이디입니다. 다른 아이디를 사용해주세요.");
-                return;
-            }
-
-            const userData = { userId, password };
-            existingUsers.push(userData);
-            localStorage.setItem("users", JSON.stringify(existingUsers.value));
-
-            alert("회원가입이 완료되었습니다!");
-            window.location.href = "home.html";
+            alert(`${userId}님, 로그인 성공!`);
+            window.location.href = "subject_select.html"; // 로그인 후 이동할 페이지
         }
 
+        // 로그인한 사용자 이름 표시
+        document.addEventListener("DOMContentLoaded", function () {
+            const userId = localStorage.getItem("userId");
+            const greetingElement = document.getElementById("userGreeting");
+
+            if (greetingElement) {
+                greetingElement.textContent = userId ? `${userId}님, 환영합니다!` : "로그인해주세요!";
+            }
+        });
 
         const faqData = {
             "자격증": {
